@@ -1,12 +1,10 @@
 import barcode
 from barcode.writer import ImageWriter
 
-# Set the barcode type and data
-barcode_type = 'ean13'
-data = input("Enter the code to generate barcode: ")
+number = input("Enter the code to generate barcode: ")
+barcode_format = barcode.get_barcode_class('upc')
+my_barcode = barcode_format(number, writer=ImageWriter())
+my_barcode.save("generated_barcode")
 
-# Create the barcode object
-my_barcode = barcode.get_barcode_class(barcode_type)(data, writer=ImageWriter())
-
-# Save the barcode image
-filename = f"generated_{barcode_type}_{data}.png"
+from PIL import Image
+Image.open('generated_barcode.png')
